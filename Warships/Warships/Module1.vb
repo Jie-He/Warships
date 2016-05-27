@@ -17,14 +17,11 @@ Module Module1
 
     Sub GetRowColumn(ByRef Row As Integer, ByRef Column As Integer)
         Try
-
-
             Console.WriteLine()
             Console.Write("Please enter column: ")
             Column = Console.ReadLine()
             Console.Write("Please enter row: ")
             Row = Console.ReadLine()
-
             'Check for validation
             If (Row > 9) Or Row < 0 Or Column > 9 Or Column < 0 Then
                 Console.WriteLine("Your coordinates are out of bound. Please reenter: ")
@@ -86,6 +83,8 @@ Module Module1
         For Each Ship In Ships
             Valid = False
             While Not Valid
+                'Randomise seed
+                Randomize()
                 Row = Int(Rnd() * 10)
                 Column = Int(Rnd() * 10)
                 HorV = Int(Rnd() * 2)
