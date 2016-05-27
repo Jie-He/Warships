@@ -215,8 +215,14 @@ Module Module1
             For Column = 0 To 9
                 If Board(Row, Column) = "-" Then
                     Console.Write(" ")
+<<<<<<< HEAD
                 ElseIf Board(Row, Column) = "A" Or Board(Row, Column) = "C" Or Board(Row, Column) = "B" Or Board(Row, Column) = "S" Or Board(Row, Column) = "D" Or Board(Row, Column) = "P" Then
                     Console.Write(" ")
+=======
+                ElseIf Board(Row, Column) = "A" Or Board(Row, Column) = "B" Or Board(Row, Column) = "S" Or Board(Row, Column) = "D" Or Board(Row, Column) = "P" Then
+                    '   Console.Write(" ")
+                    Console.Write(Board(Row, Column))
+>>>>>>> master
                 Else
                     Console.Write(Board(Row, Column))
                 End If
