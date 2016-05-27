@@ -16,11 +16,25 @@ Module Module1
     End Structure
 
     Sub GetRowColumn(ByRef Row As Integer, ByRef Column As Integer)
-        Console.WriteLine()
-        Console.Write("Please enter column: ")
-        Column = Console.ReadLine()
-        Console.Write("Please enter row: ")
-        Row = Console.ReadLine()
+        Try
+
+
+            Console.WriteLine()
+            Console.Write("Please enter column: ")
+            Column = Console.ReadLine()
+            Console.Write("Please enter row: ")
+            Row = Console.ReadLine()
+
+            'Check for validation
+            If (Row > 9) Or Row < 0 Or Column > 9 Or Column < 0 Then
+                Console.WriteLine("Your coordinates are out of bound. Please reenter: ")
+                GetRowColumn(Row, Column)
+            End If
+
+        Catch ex As Exception
+            Console.WriteLine("Only numerical values are valid.")
+            GetRowColumn(Row, Column)
+        End Try
         Console.WriteLine()
     End Sub
 
