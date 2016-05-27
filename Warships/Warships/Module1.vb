@@ -220,11 +220,17 @@ Module Module1
         Ships(3).Size = 3
         Ships(4).Name = "Patrol Boat"
         Ships(4).Size = 2
+        Ships(5).Name = "Cruiser"
+        Ships(5).Size = 3
+        Ships(6).Name = "Patrol Boat"
+        Ships(6).Size = 2
+        Ships(7).Name = "Patrol Boat"
+        Ships(7).Size = 2
     End Sub
 
     Sub Main()
         Dim Board(9, 9) As Char
-        Dim Ships(4) As TShip
+        Dim Ships(5) As TShip
         Dim MenuOption As Integer
         Do
             SetUpBoard(Board)
