@@ -230,7 +230,7 @@ Module Module1
 
     Sub Main()
         Dim Board(9, 9) As Char
-        Dim Ships(5) As TShip
+        Dim Ships(7) As TShip
         Dim MenuOption As Integer
         Do
             SetUpBoard(Board)
