@@ -87,11 +87,15 @@ Module Module1
                 Randomize()
                 Row = Int(Rnd() * 10)
                 Column = Int(Rnd() * 10)
-                HorV = Int(Rnd() * 2)
+                HorV = Int(Rnd() * 4)
                 If HorV = 0 Then
                     Orientation = "v"
-                Else
+                ElseIf HorV = 1 Then
                     Orientation = "h"
+                ElseIf HorV = 2 Then
+                    Orientation = "p"
+                ElseIf HorV = 3 Then
+                    Orientation = "n"
                 End If
                 Valid = ValidateBoatPosition(Board, Ship, Row, Column, Orientation)
             End While
@@ -110,6 +114,14 @@ Module Module1
             For Scan = 0 To Ship.Size - 1
                 Board(Row, Column + Scan) = Ship.Name(0)
             Next
+        ElseIf (Orientation = "p") Then
+            For Scan = 0 To Ship.Size - 1
+                Board(Row - Scan, Column + Scan) = Ship.Name(0)
+            Next
+        ElseIf (Orientation = "n") Then
+            For Scan = 0 To Ship.Size - 1
+                Board(Row + Scan, Column + Scan) = Ship.Name(0)
+            Next
         End If
     End Sub
 
@@ -118,6 +130,12 @@ Module Module1
         If Orientation = "v" And Row + Ship.Size > 10 Then
             Return False
         ElseIf Orientation = "h" And Column + Ship.Size > 10 Then
+            Return False
+        ElseIf Orientation = "p"
+            If Row - Ship.Size < -1 Or Column + Ship.Size > 10 Then
+                Return False
+            End If
+        ElseIf Row + Ship.Size > 10 Or Column + Ship.Size > 10
             Return False
         Else
             If Orientation = "v" Then
@@ -129,6 +147,18 @@ Module Module1
             ElseIf (Orientation = "h") Then
                 For Scan = 0 To Ship.Size - 1
                     If Board(Row, Column + Scan) <> "-" Then
+                        Return False
+                    End If
+                Next
+            ElseIf (Orientation = "p") Then
+                For Scan = 0 To Ship.Size - 1
+                    If (Board(Row - Scan, Column + Scan) <> "-") Then
+                        Return False
+                    End If
+                Next
+            ElseIf (Orientation = "n") Then
+                For Scan = 0 To Ship.Size - 1
+                    If (Board(Row + Scan, Column + Scan) <> "-") Then
                         Return False
                     End If
                 Next
@@ -167,7 +197,8 @@ Module Module1
                 If Board(Row, Column) = "-" Then
                     Console.Write(" ")
                 ElseIf Board(Row, Column) = "A" Or Board(Row, Column) = "B" Or Board(Row, Column) = "S" Or Board(Row, Column) = "D" Or Board(Row, Column) = "P" Then
-                    Console.Write(" ")
+                    '   Console.Write(" ")
+                    Console.Write(Board(Row, Column))
                 Else
                     Console.Write(Board(Row, Column))
                 End If
@@ -230,7 +261,7 @@ Module Module1
 
     Sub Main()
         Dim Board(9, 9) As Char
-        Dim Ships(5) As TShip
+        Dim Ships(7) As TShip
         Dim MenuOption As Integer
         Do
             SetUpBoard(Board)
