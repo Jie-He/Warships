@@ -48,6 +48,38 @@ Module Module1
             Console.WriteLine("Hit at (" & Column & "," & Row & ").")
             Board(Row, Column) = "h"
         End If
+
+        Detectablity(Board, Row, Column)
+    End Sub
+
+    Private Sub Detectablity(ByVal Board(,) As Char, Hitrow As Integer, Hitcolumn As Integer)
+        'For row = 0 To 9
+        '    For column = 0 To 9
+        '        If Not (Board(row, column) = "m" Or Board(row, column) = "h" Or Board(row, column) = "-") Then
+        '            Dim dRow As Integer = row - Hitrow
+        '            Dim dColumn As Integer = column - Hitcolumn
+        '            If (dRow < 2 And dRow > -2 And dColumn > -2 And dColumn < 2) Then
+        '                Console.WriteLine("DROW : " & dRow & " DCOLUMN : " & dColumn)
+        '                Console.WriteLine("Ship detected in range of 1 cell.")
+        '                Return
+        '            End If
+        '        End If
+        '    Next
+        'Next
+        Dim pivotRow As Integer = Hitrow - 1
+        Dim pivotColumn As Integer = Hitcolumn - 1
+        Try
+            For row = 0 To 2
+                For column = 0 To 2
+                    If Not (Board(pivotRow + row, pivotColumn + column) = "m" Or Board(pivotRow + row, pivotColumn + column) = "h" Or Board(pivotRow + row, pivotColumn + column) = "-") Then
+                        Console.WriteLine("Ship detected in range of 1 cell.")
+                        Return
+                    End If
+                Next
+            Next
+        Catch
+        End Try
+        Console.WriteLine("No ships detected in range.")
     End Sub
 
     Sub SetUpBoard(ByRef Board(,) As Char)
@@ -196,9 +228,19 @@ Module Module1
             For Column = 0 To 9
                 If Board(Row, Column) = "-" Then
                     Console.Write(" ")
+<<<<<<< HEAD
+<<<<<<< HEAD
+                ElseIf Board(Row, Column) = "A" Or Board(Row, Column) = "C" Or Board(Row, Column) = "B" Or Board(Row, Column) = "S" Or Board(Row, Column) = "D" Or Board(Row, Column) = "P" Then
+                    Console.Write(" ")
+=======
                 ElseIf Board(Row, Column) = "A" Or Board(Row, Column) = "B" Or Board(Row, Column) = "S" Or Board(Row, Column) = "D" Or Board(Row, Column) = "P" Then
                     '   Console.Write(" ")
                     Console.Write(Board(Row, Column))
+>>>>>>> master
+=======
+                    'ElseIf Board(Row, Column) = "A" Or Board(Row, Column) = "C" Or Board(Row, Column) = "B" Or Board(Row, Column) = "S" Or Board(Row, Column) = "D" Or Board(Row, Column) = "P" Then
+                    '    Console.Write(" ")
+>>>>>>> Alternative_detectmethod
                 Else
                     Console.Write(Board(Row, Column))
                 End If
