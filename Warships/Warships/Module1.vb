@@ -16,11 +16,22 @@ Module Module1
     End Structure
 
     Sub GetRowColumn(ByRef Row As Integer, ByRef Column As Integer)
-        Console.WriteLine()
-        Console.Write("Please enter column: ")
-        Column = Console.ReadLine()
-        Console.Write("Please enter row: ")
-        Row = Console.ReadLine()
+        Try
+            Console.WriteLine()
+            Console.Write("Please enter column: ")
+            Column = Console.ReadLine()
+            Console.Write("Please enter row: ")
+            Row = Console.ReadLine()
+            'Check for validation
+            If (Row > 9) Or Row < 0 Or Column > 9 Or Column < 0 Then
+                Console.WriteLine("Your coordinates are out of bound. Please reenter: ")
+                GetRowColumn(Row, Column)
+            End If
+
+        Catch ex As Exception
+            Console.WriteLine("Only numerical values are valid.")
+            GetRowColumn(Row, Column)
+        End Try
         Console.WriteLine()
     End Sub
 
@@ -72,6 +83,8 @@ Module Module1
         For Each Ship In Ships
             Valid = False
             While Not Valid
+                'Randomise seed
+                Randomize()
                 Row = Int(Rnd() * 10)
                 Column = Int(Rnd() * 10)
                 HorV = Int(Rnd() * 2)
@@ -207,11 +220,17 @@ Module Module1
         Ships(3).Size = 3
         Ships(4).Name = "Patrol Boat"
         Ships(4).Size = 2
+        Ships(5).Name = "Cruiser"
+        Ships(5).Size = 3
+        Ships(6).Name = "Patrol Boat"
+        Ships(6).Size = 2
+        Ships(7).Name = "Patrol Boat"
+        Ships(7).Size = 2
     End Sub
 
     Sub Main()
         Dim Board(9, 9) As Char
-        Dim Ships(4) As TShip
+        Dim Ships(5) As TShip
         Dim MenuOption As Integer
         Do
             SetUpBoard(Board)
